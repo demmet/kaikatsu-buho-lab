@@ -2,11 +2,25 @@ version: '3'
 services:
   web:
     build: .
+    command: bash -c "while [ true ]; do sleep 10; done"
+    container_name: kakatsu
+    environment:
+      - MIX_ENV=dev
+      - PG_HOST=db
+      - PG_USERNAME=postgres
+      - PG_PASSWORD=postgres
     ports:
-      - "4000:4000"
+      - "4033:4033"
     volumes:
-      - .:/app
-    depends_on:
+      - .:/kakatsu
+    links:
       - db
   db:
-    image: postgres:10.5
+    container_name: kakatsu-db
+    image: postgres:9.5
+    environment:
+      - POSTGRES_DB=kakatsu_db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - 5432
