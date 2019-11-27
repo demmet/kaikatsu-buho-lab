@@ -3,7 +3,7 @@ services:
   web:
     build: .
     command: bash -c "while [ true ]; do sleep 10; done"
-    container_name: kakatsu
+    container_name: kaikatsu
     environment:
       - MIX_ENV=dev
       - PG_HOST=db
@@ -12,14 +12,14 @@ services:
     ports:
       - "4033:4033"
     volumes:
-      - .:/kakatsu
+      - .:/kaikatsu
     links:
       - db
   db:
-    container_name: kakatsu-db
+    container_name: kaikatsu-db
     image: postgres:9.5
     environment:
-      - POSTGRES_DB=kakatsu_db
+      - POSTGRES_DB=kaikatsu_db
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     ports:
